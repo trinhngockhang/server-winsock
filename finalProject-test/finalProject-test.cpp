@@ -5,6 +5,8 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include "winsock2.h"
 #include <string>
+#include <iostream>
+ 
 using namespace std;
 DWORD WINAPI ClientThread(LPVOID);
 bool check_pass(char username[], char password[]);
@@ -18,7 +20,6 @@ int main()
 {
 	WSADATA wsa;
 	WSAStartup(MAKEWORD(2, 2), &wsa);
-
 	SOCKET listener = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
 	SOCKADDR_IN addr;
@@ -68,7 +69,7 @@ DWORD WINAPI ClientThread(LPVOID lpParam)
 		buf[ret] = 0;
 		printf("Received: %s\n", buf);
 		if(strncmp(buf, "GET / HTTP", 10 ) == 0){
-			printf("da nhan request");
+			printf("da nhan request\n");
 			FILE *f = fopen("Login.html", "rb");
 			while (true)
 			{
@@ -82,8 +83,9 @@ DWORD WINAPI ClientThread(LPVOID lpParam)
 			fclose(f);
 		}
 		else if (strncmp(buf, "POST /log-in", 12) == 0) {
-			printf("da nhan request POST");
-			char *body = buf + 522;
+			printf("da nhan request POST\n");
+			printf("%s", buf);
+			char *body = strstr(buf, "username=");
 			char *msg;
 			printf("\nbody: %s", body);
 			char re_username[128], *username;
@@ -91,7 +93,7 @@ DWORD WINAPI ClientThread(LPVOID lpParam)
 			sscanf(body, "%128[^&] & %128[^&] & %s",re_username,re_password,end);
 			username = re_username + 9;
 			password = re_password + 9;
-			printf("\n user nhap: %s pass nhap: %s", username, password);
+			printf("\n user nhap: %s pass nhap: %s\n", username, password);
 			bool a = check_pass(username, password);
 			if(a){
 			  msg = "HTTP/1.1 200 OK\r\n Set-Cookie: Login=true\r\nContent-Type: text/html\r\n\r\n<html><body>Dung mat khau r</body></html>";
@@ -118,6 +120,8 @@ DWORD WINAPI ClientThread(LPVOID lpParam)
 		}
 		else if (strncmp(buf, "POST /sign-up", 13) == 0) {
 			// lay du lieu o day roi ghi vao file data.txt,nho check user da ton tai hay cgya
+
+
 			char *msg = "HTTP/1.1 200 OK\r\n Set-Cookie: Login=true\r\nContent-Type: text/html\r\n\r\n<html><body><h1>Dang ki thanh cong </h1> <a href='/'><button>Back</button></a> </body></html>";
 			send(client, msg, strlen(msg), 0);
 			closesocket(client);
