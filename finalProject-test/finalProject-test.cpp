@@ -12,7 +12,7 @@ char *connection_info(struct sockaddr_in &client);
 SOCKET clients[64];
 char *ids[64];
 int numClients;
-
+char *token[128];
 
 int main()
 {
@@ -30,7 +30,6 @@ int main()
 	listen(listener, 5);
 
 	numClients = 0;
-
 	while (true)
 	{
 		struct sockaddr_in client_info = { 0 };
@@ -68,7 +67,7 @@ DWORD WINAPI ClientThread(LPVOID lpParam)
 		if (ret <= 0) break;
 		buf[ret] = 0;
 		printf("Received: %s\n", buf);
-		if(strncmp(buf, "GET /", 5 ) == 0){
+		if(strncmp(buf, "GET / HTTP", 10 ) == 0){
 			printf("da nhan request");
 			FILE *f = fopen("Login.html", "rb");
 			while (true)
@@ -92,15 +91,34 @@ DWORD WINAPI ClientThread(LPVOID lpParam)
 			sscanf(body, "%128[^&] & %128[^&] & %s",re_username,re_password,end);
 			username = re_username + 9;
 			password = re_password + 9;
-
+			printf("\n user nhap: %s pass nhap: %s", username, password);
 			bool a = check_pass(username, password);
 			if(a){
-			  msg = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html><body>Dung mat khau r</body></html>";
+			  msg = "HTTP/1.1 200 OK\r\n Set-Cookie: Login=true\r\nContent-Type: text/html\r\n\r\n<html><body>Dung mat khau r</body></html>";
 			}
 			else {
-				msg = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html><body>Sai mat khau ,ngu!!!r</body></html>";
+			  msg = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html><body>Sai mat khau ,ngu!!!r</body></html>";
 			}
 			
+			send(client, msg, strlen(msg), 0);
+			closesocket(client);
+		}
+		else if (strncmp(buf, "GET /sign-up", 12) == 0) {
+			FILE *f = fopen("sign-up.html", "rb");
+			while (true)
+			{
+				ret = fread(buf, 1, sizeof(buf), f);
+				if (ret > 0)
+					send(client, buf, ret, 0);
+				else
+					break;
+			}
+			closesocket(client);
+			fclose(f);
+		}
+		else if (strncmp(buf, "POST /sign-up", 13) == 0) {
+			// lay du lieu o day roi ghi vao file data.txt,nho check user da ton tai hay cgya
+			char *msg = "HTTP/1.1 200 OK\r\n Set-Cookie: Login=true\r\nContent-Type: text/html\r\n\r\n<html><body><h1>Dang ki thanh cong </h1> <a href='/'><button>Back</button></a> </body></html>";
 			send(client, msg, strlen(msg), 0);
 			closesocket(client);
 		}
@@ -140,7 +158,11 @@ bool check_pass(char username[], char password[]) {
 					int slpit;
 					slpit = sscanf(lineInText, "%s %s %s", userDb,passDb, end);
 					printf("\n user: %s pass: %s", userDb, passDb);
-					if (strcmp(username, userDb) == 0 && strcmp(password, passDb) == 0) return true;
+				
+					if (strcmp(username, userDb) == 0 && strcmp(password, passDb) == 0) {
+						printf("dung mat khau");
+						return true;
+					}
 				}
 
 			}
@@ -150,4 +172,14 @@ bool check_pass(char username[], char password[]) {
 	}
 	fclose(f);
 	return false;
+}
+
+char *generateToken() {
+	int i = 0;
+	char token[10];
+	while (i < 10) {
+
+		i++;
+	}
+	return token;
 }

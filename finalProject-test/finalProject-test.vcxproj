@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Login.html" />
+    <None Include="sign-up.html" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

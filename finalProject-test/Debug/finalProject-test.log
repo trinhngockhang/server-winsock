@@ -1,9 +1,11 @@
 ﻿  finalProject-test.cpp
-c:\users\khangkhang\documents\visual studio 2015\projects\finalproject-test\finalproject-test\finalproject-test.cpp(56): warning C4101: 'cmd': unreferenced local variable
-c:\users\khangkhang\documents\visual studio 2015\projects\finalproject-test\finalproject-test\finalproject-test.cpp(58): warning C4101: 'tmp': unreferenced local variable
-c:\users\khangkhang\documents\visual studio 2015\projects\finalproject-test\finalproject-test\finalproject-test.cpp(57): warning C4101: 'id': unreferenced local variable
-c:\users\khangkhang\documents\visual studio 2015\projects\finalproject-test\finalproject-test\finalproject-test.cpp(60): warning C4101: 'targetId': unreferenced local variable
-c:\users\khangkhang\documents\visual studio 2015\projects\finalproject-test\finalproject-test\finalproject-test.cpp(53): warning C4101: 'sendBuf': unreferenced local variable
-c:\users\khangkhang\documents\visual studio 2015\projects\finalproject-test\finalproject-test\finalproject-test.cpp(110): warning C4715: 'ClientThread': not all control paths return a value
-  finalProject-test.vcxproj -> C:\Users\Khangkhang\Documents\Visual Studio 2015\Projects\finalProject-test\Debug\finalProject-test.exe
-  finalProject-test.vcxproj -> C:\Users\Khangkhang\Documents\Visual Studio 2015\Projects\finalProject-test\Debug\finalProject-test.pdb (Full PDB)
+c:\users\khangkhang\documents\visual studio 2015\projects\finalproject-test\finalproject-test\finalproject-test.cpp(35): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'int'
+c:\users\khangkhang\documents\visual studio 2015\projects\finalproject-test\finalproject-test\finalproject-test.cpp(58): warning C4101: 'cmd': unreferenced local variable
+c:\users\khangkhang\documents\visual studio 2015\projects\finalproject-test\finalproject-test\finalproject-test.cpp(60): warning C4101: 'tmp': unreferenced local variable
+c:\users\khangkhang\documents\visual studio 2015\projects\finalproject-test\finalproject-test\finalproject-test.cpp(59): warning C4101: 'id': unreferenced local variable
+c:\users\khangkhang\documents\visual studio 2015\projects\finalproject-test\finalproject-test\finalproject-test.cpp(62): warning C4101: 'targetId': unreferenced local variable
+c:\users\khangkhang\documents\visual studio 2015\projects\finalproject-test\finalproject-test\finalproject-test.cpp(55): warning C4101: 'sendBuf': unreferenced local variable
+c:\users\khangkhang\documents\visual studio 2015\projects\finalproject-test\finalproject-test\finalproject-test.cpp(131): warning C4715: 'ClientThread': not all control paths return a value
+c:\users\khangkhang\documents\visual studio 2015\projects\finalproject-test\finalproject-test\finalproject-test.cpp(187): warning C4172: returning address of local variable or temporary: token
+  finalProject-test.vcxproj -> C:\Users\Khangkhang\documents\visual studio 2015\Projects\finalProject-test\Debug\finalProject-test.exe
+  finalProject-test.vcxproj -> C:\Users\Khangkhang\documents\visual studio 2015\Projects\finalProject-test\Debug\finalProject-test.pdb (Full PDB)

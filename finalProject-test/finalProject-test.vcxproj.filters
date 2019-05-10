@@ -36,5 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Login.html" />
+    <None Include="sign-up.html" />
   </ItemGroup>
 </Project>
